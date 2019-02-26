@@ -1,0 +1,5 @@
+footer {
+    @include font($secondaryFont, .4rem, 300);
+    border-top: 2px solid $secondaryColor;
+    text-align:center;
+}

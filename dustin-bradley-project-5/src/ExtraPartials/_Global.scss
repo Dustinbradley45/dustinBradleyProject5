@@ -1,0 +1,32 @@
+body {
+    font-size: 62.5%;
+    max-width: 1300px;
+    margin:0 auto;
+    background-color:$primaryColor;
+    color: $secondaryColor;
+}
+
+img{
+    display:block;
+}
+
+p {
+    font-size: 2rem;
+}
+
+ul {
+    padding: 0;
+    margin:0;
+}
+
+li {
+    list-style:none;
+
+}
+
+a {
+    text-decoration:none;
+   
+}
+
+

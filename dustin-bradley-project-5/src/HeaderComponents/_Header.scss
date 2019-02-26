@@ -1,0 +1,35 @@
+header {
+   @include flex(column, center, flex-end);
+   
+   h1 {
+       @include font($primaryFont,4rem, 600);
+       text-transform:lowercase;
+       width:100%;
+       border-bottom: 2px solid $secondaryColor;
+   }
+}
+
+.lowerCase {
+
+    padding-left: 10px;
+}
+
+nav {
+      align-self: center;
+    ul {
+       @include flex (row, space-between, center);
+       
+        li {
+            padding: 0 5px;
+            margin: 0 20px;
+            @include font($secondaryFont, 3rem, 300);
+            text-transform: lowercase;
+            // transition: 1s border-bottom ease;
+            
+
+            &:hover {
+                border-bottom: 1px solid $secondaryColor;
+            }
+        }
+    }
+}
