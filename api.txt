@@ -1,4 +1,4 @@
-eventbrite: XUMLOLES5UBTAAFHSY5N
-
-ticketmaster: 	lxurzu45b4hcZTpUUOlSc4XKlJU3Ypzo
-consumerSecret: 	cUfubR5ljnwsqUno
+Application name 	Music Diary
+API key 	d2765512b20f78bf45d71651adbe2075
+Shared secret 	7c139c4e62d447d305d2df44d56d202c
+Registered to 	dustinbraldey45

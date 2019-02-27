@@ -9,6 +9,15 @@ header {
    }
 }
 
+nav input {
+     background-color: $primaryColor;
+     border: none;
+     color: $secondaryColor;
+     text-align:center;
+     @include font($secondaryFont, 1.5rem, 300)
+
+}
+
 .lowerCase {
 
     padding-left: 10px;
@@ -16,6 +25,8 @@ header {
 
 nav {
       align-self: center;
+      
+
     ul {
        @include flex (row, space-between, center);
        
