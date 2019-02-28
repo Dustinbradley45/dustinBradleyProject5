@@ -8,24 +8,30 @@ header {
    overflow:hidden;
    
    h1 {
-       @include font($primaryFont,4rem, 600);
+       @include font($primaryFont,4rem, 300);
        text-transform:lowercase;
        width:100%;
        padding:0;
-       margin-bottom:25px;
+       margin-bottom:35px;
    }
 
-   &:hover {
-       height: 25vh;
+   &:hover,
+   &:focus {
+       height: 27vh;
    }
 }
+
+header:hover+footer {
+    height: 0;
+}
+
 
 nav input {
      background-color: $primaryColor;
      border: none;
      color: $secondaryColor;
      text-align:center;
-     @include font($secondaryFont, 1.5rem, 300);
+     @include font($primaryFont, 1.5rem, 300);
 
 
     //  &:focus-within {
@@ -64,16 +70,18 @@ nav {
 button {
     background: transparent;
     color:$secondaryColor;
-    border: none;
+
     border: 1px solid $secondaryColor;
     transition: .1s all linear;
-    padding: 3px;
+    padding: 5px 10px;
+    @include font($primaryFont, 1rem, 300);
+    
  
     &:hover,
     &:focus-within, {
         border: 1px solid $secondaryColor;
-        color: $primaryColor;
-        background-color: $secondaryColor;
+        color: darken($primaryColor, 5%);
+        background-color: darken($secondaryColor,5%);
     }
 }
 

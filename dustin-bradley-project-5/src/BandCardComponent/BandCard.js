@@ -13,22 +13,22 @@ class BandCard extends Component {
     render() {
         
         return (
-            <React.Fragment>
+            <ul>
                  {
                     this.props.bandInfo.map((albumInfo, i) => {
                     
                             return (
-                                <div class='bandCardContainer' key={i}>
+                                <li className='bandCardContainer' key={i}>
                                     <img src={albumInfo.albumImgUrl} alt=''></img>
                                     <h4>{albumInfo.albumBandName}</h4>
-                                </div>
+                                </li>
                             )
                         }
              
                      )
                     
                 }
-            </React.Fragment>
+            </ul>
         )
     }
 }

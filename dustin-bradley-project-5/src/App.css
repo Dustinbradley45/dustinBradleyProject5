@@ -210,6 +210,8 @@ img {
 
 p {
   font-size: 2rem;
+  padding: 0;
+  margin: 0;
 }
 
 ul {
@@ -251,15 +253,19 @@ header {
 header h1 {
   font-family: "Open Sans", sans-serif;
   font-size: 4rem;
-  font-weight: 600;
+  font-weight: 300;
   text-transform: lowercase;
   width: 100%;
   padding: 0;
-  margin-bottom: 25px;
+  margin-bottom: 35px;
 }
 
-header:hover {
-  height: 25vh;
+header:hover, header:focus {
+  height: 27vh;
+}
+
+header:hover + footer {
+  height: 0;
 }
 
 nav input {
@@ -267,7 +273,7 @@ nav input {
   border: none;
   color: #ff7367;
   text-align: center;
-  font-family: "Open Sans Condensed", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 1.5rem;
   font-weight: 300;
 }
@@ -314,28 +320,19 @@ nav ul li:hover {
 button {
   background: transparent;
   color: #ff7367;
-  border: none;
   border: 1px solid #ff7367;
   -webkit-transition: .1s all linear;
   transition: .1s all linear;
-  padding: 3px;
+  padding: 5px 10px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
 }
 
 button:hover, button:focus-within {
   border: 1px solid #ff7367;
-  color: #002a45;
-  background-color: #ff7367;
-}
-
-footer {
-  font-family: "Open Sans Condensed", sans-serif;
-  font-size: 0.4rem;
-  font-weight: 300;
-  border-top: 2px solid #ff7367;
-  text-align: center;
-  z-index: 100;
-  height: 10vh;
-  background-color: #002a45;
+  color: #001a2c;
+  background-color: #ff5c4e;
 }
 
 main {
@@ -355,8 +352,28 @@ main {
           align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  height: 70vh;
+  height: 80vh;
   overflow: hidden;
+  -webkit-transition: .2s height linear;
+  transition: .2s height linear;
+}
+
+ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .bandCardContainer {
@@ -415,10 +432,13 @@ main {
 
 @-webkit-keyframes scrollAlbumUp {
   0% {
-    opacity: 1;
-    -webkit-transform: translateY(-1500px);
-            transform: translateY(-1500px);
+    opacity: 0;
+    -webkit-transform: translateY(-1000px);
+            transform: translateY(-1000px);
     z-index: -1;
+  }
+  5% {
+    opacity: 1;
   }
   50% {
     opacity: 1;
@@ -426,7 +446,7 @@ main {
             transform: translateY(0px);
   }
   100% {
-    opacity: 1;
+    opacity: 0;
     -webkit-transform: translateY(800px);
             transform: translateY(800px);
   }
@@ -434,10 +454,13 @@ main {
 
 @keyframes scrollAlbumUp {
   0% {
-    opacity: 1;
-    -webkit-transform: translateY(-1500px);
-            transform: translateY(-1500px);
+    opacity: 0;
+    -webkit-transform: translateY(-1000px);
+            transform: translateY(-1000px);
     z-index: -1;
+  }
+  5% {
+    opacity: 1;
   }
   50% {
     opacity: 1;
@@ -445,9 +468,37 @@ main {
             transform: translateY(0px);
   }
   100% {
-    opacity: 1;
+    opacity: 0;
     -webkit-transform: translateY(800px);
             transform: translateY(800px);
   }
+}
+
+footer {
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 0.4rem;
+  font-weight: 300;
+  border-top: 2px solid #ff7367;
+  text-align: center;
+  z-index: 100;
+  background-color: #002a45;
+  height: 5vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+footer p {
+  font-size: 1rem;
 }
 /*# sourceMappingURL=App.css.map */

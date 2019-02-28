@@ -14,7 +14,7 @@ class Header extends Component {
     render() {
     
         return (
-            <header>
+            <header tabIndex='0'>
                 <div className="headerLeft">
                     <h1>This thing I made.</h1>
                 </div>
@@ -24,11 +24,11 @@ class Header extends Component {
                             type="text"
                             placeholder='Search By Artist' name='artistQuery'
                             onChange={this.props.changeHandler} />
-                        <button type="submit">Submit</button>
+                        <button type="submit" toggleHidden={this.props.isHidden}>Submit</button>
+                        {
+                           !this.props.isHidden ? console.log('cat') : null
+                        }
                     </form>
-                </nav>
-                
-                
                 {this.props.initialResponse.length > 0 ? 
                     <select>
                         {this.props.initialResponse.map((options, i) => {
@@ -38,6 +38,9 @@ class Header extends Component {
                     </select>
                     : null
                     }
+                </nav>
+                
+                
             </header>
             
         )

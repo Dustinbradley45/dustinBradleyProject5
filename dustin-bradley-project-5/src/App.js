@@ -13,7 +13,8 @@ class App extends Component {
       artistQuery: '',
       results: '',
       userChoice: '',
-      bandInfo: []
+      bandInfo: [],
+      isHidden:'false'
     }
   }
   checkUserResponse = (e) => {
@@ -55,34 +56,38 @@ class App extends Component {
     )
   }
 
+  toggleHidden = () => {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+  }
 
-    fetchChoiceData = () => {
-      const dbRef = firebase.database().ref();
-      dbRef.on('value', response => {
-        const fetchedData = [];
-        const data = response.val();
 
-        for (let key in data) {
-          fetchedData.push({
-            key: key,
-            title: data[key]
-          })
-        }
+    // fetchChoiceData = () => {
+    //   const dbRef = firebase.database().ref();
+    //   dbRef.on('value', response => {
+    //     const fetchedData = [];
+    //     const data = response.val();
+
+    //     for (let key in data) {
+    //       fetchedData.push({
+    //         key: key,
+    //         title: data[key]
+    //       })
+    //     }
      
-        this.setState({
-          clickedData: fetchedData
-        });
-      })
-    }
+    //     this.setState({
+    //       clickedData: fetchedData
+    //     });
+    //   })
+    // }
   
   useChoiceData = () => {
     this.state.clickedData.map(album => {
       return album.bandUrl, album.bandName
     })
-   
   }
 
-    
     changeHandler = (e) => {
       this.setState({
         [e.target.name]: e.target.value
@@ -131,6 +136,7 @@ class App extends Component {
           changeHandler={this.changeHandler}
           submitHandler={this.submitHandler}
           initialResponse={this.state.results}
+          toggleHidden={this.state.toggleHidden}
           checkUserResponse={this.checkUserResponse}
          
           />
