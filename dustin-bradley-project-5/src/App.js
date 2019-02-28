@@ -21,38 +21,16 @@ class App extends Component {
   checkUserResponse = (e) => {
     this.setState({
       userChoice: e.target.value
+    }, () => {
+        const albumChoice = this.state.results.filter(item => {
+          return item.name === this.state.userChoice
+        })
+        this.setState({
+          bandUrl: albumChoice[0].image[0]['#text'],
+          bandName: albumChoice[0].name
+        })
+        console.log(albumChoice)
     })
-    const albumNames =[]
-    for (let key in this.state.results) {
-      const albumName = this.state.results[key].name;
-      albumNames.push(albumName);
-      // albumName.find(name => {
-        // return name === this.state.userChoice
-        // })
-        // console.log(name)
-        
-      }
-    console.log(albumNames)
-    
-    albumNames.map(rightName, i => {
-     return rightName.find(this.state.userChoice)
-    })
-      //  albumNames.find(matchingName => {
-      // return matchingName === this.setState.userChoice;
-  
-      // })
-
-    
-    // this.state.results.map(item => {
-    //   if (item.name === this.state.userChoice) {
-    //     this.setState({
-    //       bandUrl: item.image[0]["#text"],
-    //       bandName: item.name
-    //     })
-    //   }
-    // });
-    
- 
   };
 
     
