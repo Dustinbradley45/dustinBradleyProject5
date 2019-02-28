@@ -1,20 +1,37 @@
 import React, { Component } from 'react';
+import ScrollReveal from 'scrollreveal';
 
 // MAP OVER DATA AND APPEND AS PER BELOW;
 // <this className="state band"></this>
 class BandCard extends Component {
+    constructor() {
+        super();
+        
+        ScrollReveal().reveal('.bandCardContainer')
+    }
    
     render() {
-        console.log(this.props)
+        
         return (
-            <div className='bandCardContainer'>
-                <img src={this.props.bandUrl} alt=''></img>
-                <h4>{this.props.bandName}</h4> 
-            </div>
+            <React.Fragment>
+                 {
+                    this.props.bandInfo.map((albumInfo, i) => {
+                    
+                            return (
+                                <div class='bandCardContainer' key={i}>
+                                    <img src={albumInfo.albumImgUrl} alt=''></img>
+                                    <h4>{albumInfo.albumBandName}</h4>
+                                </div>
+                            )
+                        }
+             
+                     )
+                    
+                }
+            </React.Fragment>
         )
     }
 }
-
 
 
 

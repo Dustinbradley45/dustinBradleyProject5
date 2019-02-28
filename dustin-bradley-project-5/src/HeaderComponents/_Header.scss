@@ -1,11 +1,22 @@
 header {
    @include flex(column, center, flex-end);
+   z-index: 100;
+   background-color:$primaryColor;
+   height: 15vh;
+   border-bottom: 2px solid $secondaryColor;
+   transition: .3s height linear;
+   overflow:hidden;
    
    h1 {
        @include font($primaryFont,4rem, 600);
        text-transform:lowercase;
        width:100%;
-       border-bottom: 2px solid $secondaryColor;
+       padding:0;
+       margin-bottom:25px;
+   }
+
+   &:hover {
+       height: 25vh;
    }
 }
 
@@ -14,7 +25,12 @@ nav input {
      border: none;
      color: $secondaryColor;
      text-align:center;
-     @include font($secondaryFont, 1.5rem, 300)
+     @include font($secondaryFont, 1.5rem, 300);
+
+
+    //  &:focus-within {
+    //      border-bottom: 1px solid $secondaryColor;
+    //  }
 
 }
 
@@ -44,3 +60,20 @@ nav {
         }
     }
 }
+
+button {
+    background: transparent;
+    color:$secondaryColor;
+    border: none;
+    border: 1px solid $secondaryColor;
+    transition: .1s all linear;
+    padding: 3px;
+ 
+    &:hover,
+    &:focus-within, {
+        border: 1px solid $secondaryColor;
+        color: $primaryColor;
+        background-color: $secondaryColor;
+    }
+}
+

@@ -1,16 +1,23 @@
 main {
-    margin: 4rem;
+    margin: 0 4rem;
    @include flex(row, flex-start, center);
+   flex-wrap: wrap;
+   height: 70vh;
+   overflow:hidden;
 }
 
 .bandCardContainer {
     border: 2px solid $secondaryColor;
     text-align:center;
-    width: 33.3%;
+    width: 30%;
     margin: 1rem;
-     flex-wrap:wrap;
-    min-height: 550px;
+    flex-wrap:wrap;
     padding: 15px;
+    animation: scrollAlbumUp 50s linear infinite;
+
+    img{
+        width: 100%;
+    }
     
    h2 {
        @include font($primaryFont, 2rem, 300);
@@ -44,4 +51,23 @@ main {
     width: 100%;
     height: 200px;
     background-color: $secondaryColor;
+}
+
+@keyframes scrollAlbumUp {
+    0% {
+        opacity:1;
+        transform: translateY(-1500px);
+        z-index: -1;
+     
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(0px);
+ 
+    }
+    100% {
+        opacity:1;
+        transform: translateY(800px);
+      
+    }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import firebase from './firebase.js';
+import firebase from './firebase.js';
 import './App.css';
 import Header from './HeaderComponents/Header.js';
 import BandCard from './BandCardComponent/BandCard.js';
@@ -13,25 +13,74 @@ class App extends Component {
       artistQuery: '',
       results: '',
       userChoice: '',
-      bandUrl: '',
-      bandName:''
-
+      bandInfo: []
     }
   }
   checkUserResponse = (e) => {
     this.setState({
       userChoice: e.target.value
     }, () => {
-        const albumChoice = this.state.results.filter(item => {
-          return item.name === this.state.userChoice
-        })
-        this.setState({
-          bandUrl: albumChoice[0].image[0]['#text'],
-          bandName: albumChoice[0].name
-        })
-        console.log(albumChoice)
-    })
+      const albumChoice = this.state.results.filter(item => {
+        return item.name === this.state.userChoice
+      });
+
+      const playlistItem = {
+        bandUrl: albumChoice[0].image[3]['#text'],
+        bandName: albumChoice[0].name
+      };
+
+      const dbRef = firebase.database().ref();
+      dbRef.push(playlistItem);
+    });
+
   };
+
+  componentDidMount() {
+    const dbRef = firebase.database().ref();
+    dbRef.on('value', response => {
+    
+      const newArray =[]
+      for (let key in response.val()) {
+        
+        newArray.push({
+           albumImgUrl : response.val()[key].bandUrl,
+          albumBandName : response.val()[key].bandName
+        })
+     
+        this.setState({
+         bandInfo: newArray
+        })
+      }
+    }
+    )
+  }
+
+
+    fetchChoiceData = () => {
+      const dbRef = firebase.database().ref();
+      dbRef.on('value', response => {
+        const fetchedData = [];
+        const data = response.val();
+
+        for (let key in data) {
+          fetchedData.push({
+            key: key,
+            title: data[key]
+          })
+        }
+     
+        this.setState({
+          clickedData: fetchedData
+        });
+      })
+    }
+  
+  useChoiceData = () => {
+    this.state.clickedData.map(album => {
+      return album.bandUrl, album.bandName
+    })
+   
+  }
 
     
     changeHandler = (e) => {
@@ -44,6 +93,9 @@ class App extends Component {
       e.preventDefault();
       const userQuery = this.state.artistQuery
       this.search(userQuery);
+      this.setState({
+        text:''
+      });
     }
 
     search = (query) => {
@@ -58,12 +110,16 @@ class App extends Component {
           api_key: 'd2765512b20f78bf45d71651adbe2075'
         })
       }).then((response) => {
-        //  console.log(response.data.results.albummatches)
-        //  const dbRef = firebase.database().ref();
-        const userResponse = response.data.results.albummatches.album
        
+        const userResponse = response.data.results.albummatches.album
+        console.log(userResponse)
+
+        const userResponseWithImage = userResponse.filter(withImages => {
+          return withImages.image[0]['#text'].length > 0 
+        })
+       console.log(userResponseWithImage)
         this.setState({
-          results: userResponse,
+          results: userResponseWithImage,
         })
       })
     }
@@ -80,8 +136,7 @@ class App extends Component {
           />
         <main>
           <BandCard
-            bandUrl={this.state.bandUrl}
-            bandName={this.state.bandName}
+            bandInfo={this.state.bandInfo}
             />
         </main>
         <Footer /> 
