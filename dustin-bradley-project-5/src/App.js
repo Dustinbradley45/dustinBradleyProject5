@@ -6,62 +6,89 @@ import Header from './HeaderComponents/Header.js';
 import BandCard from './BandCardComponent/BandCard.js';
 import Footer from './FooterComponents/Footer.js';
 
-
-
-
-
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       artistQuery: '',
       results: '',
-      userChoice: ''
+      userChoice: '',
+      bandUrl: '',
+      bandName:''
+
     }
   }
-  changeHandler = (e) => {
+  checkUserResponse = (e) => {
     this.setState({
-      [e.target.name] : e.target.value
+      userChoice: e.target.value
     })
-  }
-
-  submitHandler = (e) => {
-    e.preventDefault();
-    const userQuery = this.state.artistQuery
-    this.search(userQuery);
-  }
-
-  search = (query) => {
-     axios({
-       method: 'GET',
-       url: 'http://ws.audioscrobbler.com/2.0/',
-       dataResponse: 'json',
-       params: ({
-         method: 'album.search',
-         album: query,
-         format: 'json',
-         api_key: 'd2765512b20f78bf45d71651adbe2075'
-       })
-     }).then((response) => {
-      //  const dbRef = firebase.database().ref();
-       const userResponse = response.data.results.albummatches.album
-       
-         this.setState({
-           results: userResponse,
-         })
-       
-       })
-       
-       }
-       
-      //  this.setState({
-      //    band: response
-      //  }) 
-      //  dbRef.push(this.state.band)
-      
+    const albumNames =[]
+    for (let key in this.state.results) {
+      const albumName = this.state.results[key].name;
+      albumNames.push(albumName);
+      // albumName.find(name => {
+        // return name === this.state.userChoice
+        // })
+        // console.log(name)
+        
+      }
+    console.log(albumNames)
+    
+    albumNames.map(rightName, i => {
+     return rightName.find(this.state.userChoice)
+    })
+      //  albumNames.find(matchingName => {
+      // return matchingName === this.setState.userChoice;
   
-  
+      // })
+
+    
+    // this.state.results.map(item => {
+    //   if (item.name === this.state.userChoice) {
+    //     this.setState({
+    //       bandUrl: item.image[0]["#text"],
+    //       bandName: item.name
+    //     })
+    //   }
+    // });
+    
  
+  };
+
+    
+    changeHandler = (e) => {
+      this.setState({
+        [e.target.name]: e.target.value
+      })
+    }
+
+    submitHandler = (e) => {
+      e.preventDefault();
+      const userQuery = this.state.artistQuery
+      this.search(userQuery);
+    }
+
+    search = (query) => {
+      axios({
+        method: 'GET',
+        url: 'http://ws.audioscrobbler.com/2.0/',
+        dataResponse: 'json',
+        params: ({
+          method: 'album.search',
+          album: query,
+          format: 'json',
+          api_key: 'd2765512b20f78bf45d71651adbe2075'
+        })
+      }).then((response) => {
+        //  console.log(response.data.results.albummatches)
+        //  const dbRef = firebase.database().ref();
+        const userResponse = response.data.results.albummatches.album
+       
+        this.setState({
+          results: userResponse,
+        })
+      })
+    }
 
   render() {
     return (
@@ -70,10 +97,14 @@ class App extends Component {
           changeHandler={this.changeHandler}
           submitHandler={this.submitHandler}
           initialResponse={this.state.results}
+          checkUserResponse={this.checkUserResponse}
+         
           />
         <main>
           <BandCard
-            bandObject={this.state.band}/>
+            bandUrl={this.state.bandUrl}
+            bandName={this.state.bandName}
+            />
         </main>
         <Footer /> 
       </div>

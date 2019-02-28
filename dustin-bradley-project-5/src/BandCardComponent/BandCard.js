@@ -4,13 +4,11 @@ import React, { Component } from 'react';
 // this.state.band
 class BandCard extends Component {
     render() {
+       
         return (
             <div className='bandCardContainer'>
-                {/* {
-                    this.state.props.map((info => {
-
-                    }))
-                } */}
+                <img src={this.props.imageUrl} alt=''></img>
+                <h4>{this.props.name}</h4> 
             </div>
         )
     }
