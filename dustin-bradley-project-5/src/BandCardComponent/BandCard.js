@@ -1,39 +1,10 @@
 import React, { Component } from 'react';
 
 class BandCard extends Component {
-    constructor() {
-        super();
-        this.state = {
-            like: 0,
-            dislike:0
-        }
-    }
+   
     // onMouseOver = () => {
     //    elementID.css({})
     // }
-
-    addLike = (e) => {
-        return (
-            () => {
-                const likeCounter = this.state.like + 1;
-
-                this.setState({
-                    like: likeCounter
-                });
-            })
-    }
-
-    addDislike = (e) => {
-        return (
-            () => {
-                const dislikeCounter = this.state.dislike + 1;
-
-                this.setState({
-                    dislike:dislikeCounter
-                })
-            }
-        )
-    }
 
     render() {
 
@@ -43,8 +14,10 @@ class BandCard extends Component {
             <ul>
                 {
                     this.props.bandInfo.map((albumInfo, i) => {
+                
                         return (
-                            <li className='bandCardContainer' key={i}>
+                          
+                            <li className='bandCardContainer' key={i} onMouseEnter={this.props.stopAnimation}>
                                 <img src={albumInfo.albumImgUrl} alt=''></img>
                                 <div className='overlay'>
                                     <h4>{albumInfo.albumBandName}</h4>
@@ -53,7 +26,7 @@ class BandCard extends Component {
                                         <div className="removeCustomButton">
                                             <div className="buttonBackground">
                                                 <button className="removeButton"
-                                                    type='button'
+                                                    type='button' onClick={this.props.removeAlbum}
                                                     >
                                                     Remove
                                                 </button>
@@ -61,10 +34,10 @@ class BandCard extends Component {
                                         </div>
                                     </div>
                                     <div className="likesContainer">
-                                        <button className='likeTheAlbum' onClick={this.addLike()}>
+                                        <button className='likeTheAlbum' onClick={this.props.addLike}>
                                             LIKE
                                         </button>
-                                        <button className='dislikeTheAlbum' onClick={this.addDislike()}>
+                                        <button className='dislikeTheAlbum' onClick={this.props.addDislike}>
                                             DISLIKE
                                         </button>
                                     </div>
@@ -79,6 +52,9 @@ class BandCard extends Component {
         )
     }                
  }
+
+//STOP ANIMATION ON HOVER HMMMMM
+//  PUSHING LIKE/DISLIKE TO FIREBASE AND PROCESSING INFO
 
 
     

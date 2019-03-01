@@ -278,6 +278,12 @@ nav input {
   font-weight: 300;
 }
 
+nav input:focus-within {
+  border-bottom: 1px solid #ff7367;
+  -webkit-box-shadow: -1px 0px 22px 5px rgba(255, 115, 103, 0.75);
+  box-shadow: -1px 0px 22px 5px rgba(255, 115, 103, 0.75);
+}
+
 .lowerCase {
   padding-left: 10px;
 }
@@ -349,6 +355,8 @@ select {
 
 select:focus, select:hover {
   border-bottom: 1px solid #ff7367;
+  -webkit-box-shadow: 0px 0px 15px 5px rgba(255, 115, 103, 0.75);
+  box-shadow: 0px 0px 15px 5px rgba(255, 115, 103, 0.75);
 }
 
 select .caretDown {
@@ -381,8 +389,6 @@ ul {
           align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-animation: scrollAlbumUp 50s linear infinite;
-          animation: scrollAlbumUp 50s linear infinite;
 }
 
 .bandCardContainer {
@@ -391,6 +397,10 @@ ul {
   text-align: center;
   padding: 15px;
   position: relative;
+  -webkit-animation: scrollAlbumUp 50s linear infinite;
+          animation: scrollAlbumUp 50s linear infinite;
+  -webkit-transition: .3s all linear;
+  transition: .3s all linear;
 }
 
 .bandCardContainer img {
@@ -429,6 +439,11 @@ ul {
   color: #002a45;
 }
 
+.bandCardContainer:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
 .overlay {
   background-color: rgba(255, 255, 255, 0.5);
   position: absolute;
@@ -461,9 +476,9 @@ ul {
   color: #002a45;
 }
 
-li:hover ul {
-  -webkit-animation: 0;
-          animation: 0;
+ul:hover .bandCardContainer {
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
 }
 
 .buttonContainer {
@@ -561,8 +576,8 @@ li:hover ul {
 
 @-webkit-keyframes scrollAlbumUp {
   0% {
-    -webkit-transform: translateY(-1000px);
-            transform: translateY(-1000px);
+    -webkit-transform: translateY(-800px);
+            transform: translateY(-800px);
   }
   5% {
   }
@@ -578,8 +593,8 @@ li:hover ul {
 
 @keyframes scrollAlbumUp {
   0% {
-    -webkit-transform: translateY(-1000px);
-            transform: translateY(-1000px);
+    -webkit-transform: translateY(-800px);
+            transform: translateY(-800px);
   }
   5% {
   }

@@ -15,10 +15,12 @@ class App extends Component {
       results: [],
       userChoice: '',
       bandInfo: [],
-      isHidden:false
+      isHidden: false,
+      like: 0,
+      dislike: 0
     }
   }
-  
+
   checkUserResponse = (e) => {
     this.setState({
       userChoice: e.target.value
@@ -29,7 +31,9 @@ class App extends Component {
 
       const playlistItem = {
         bandUrl: albumChoice[0].image[3]['#text'],
-        bandName: albumChoice[0].name
+        bandName: albumChoice[0].name,
+        likes: 0,
+        dislikes: 0
       };
 
       const dbRef = firebase.database().ref();
@@ -37,8 +41,42 @@ class App extends Component {
     });
   };
 
+      addLike = (e) => {
+        return (
+          () => {
+            const likeCounter = this.state.like + 1;
+            this.setState({
+              like: likeCounter
+            });
+
+            for (let album in this.state.bandInfo) {
+              const dbRef = firebase.database().ref('album/' + album.likes).set({
+                likes: this.state.likes + 1
+              });
+              
+              dbRef.push(this.state.like);
+              
+            }
+            console.log(this.state.like);
+
+          })
+      }
+
+      addDislike = (e) => {
+        return (
+          () => {
+            const dislikeCounter = this.state.dislike + 1;
+
+            this.setState({
+              dislike: dislikeCounter
+            }) 
+          }
+        )
+      }
+   
+
     removeAlbum = (e) => {
-      const dbRef = firebase.database().ref();
+      const dbRef = firebase.database().ref( );
       dbRef.remove();
     }
 
@@ -46,12 +84,15 @@ class App extends Component {
     const dbRef = firebase.database().ref();
     dbRef.on('value', response => {
     
-      const newArray =[]
-      for (let key in response.val()) {
-        
+      const newArray = [];
+      const data = response.val();
+
+      for (let album in data) {
         newArray.push({
-           albumImgUrl : response.val()[key].bandUrl,
-          albumBandName : response.val()[key].bandName
+          albumImgUrl : data[album].bandUrl,
+          albumBandName: data[album].bandName,
+          albumKey: album,
+          
         })
      
         this.setState({
@@ -128,6 +169,12 @@ class App extends Component {
         <main>
           <BandCard
             bandInfo={this.state.bandInfo}
+            addLike={this.addLike}
+            removeAlbum={this.removeAlbum}
+            addDislike={this.addDislike}
+            likes={this.state.likes}
+            dislikes={this.state.dislikes}
+            stopAnimation={this.stopAnimation}
             />
         </main>
         <Footer /> 

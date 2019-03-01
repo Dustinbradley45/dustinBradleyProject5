@@ -9,7 +9,7 @@ ul {
 
     @include flex(row, center,center);
     flex-wrap: wrap;
-    animation: scrollAlbumUp 50s linear infinite;
+
 
 }
 
@@ -19,6 +19,8 @@ ul {
     text-align:center;
     padding: 15px;
     position:relative;
+    animation: scrollAlbumUp 50s linear infinite;
+    transition: .3s all linear;
  
     img{
         width: 100%;
@@ -49,7 +51,11 @@ ul {
             background-color: $secondaryColor;
             color:$primaryColor;
         }
-   }
+    }
+
+    &:hover {
+        transform:scale(1.1);
+    }
 }
 
 .overlay {
@@ -64,10 +70,6 @@ ul {
     margin: 15px;
 }
 
-
-
-
-
 .bandCardContainer:hover .overlay{
     opacity:1;
     @include flex(column, center,center);
@@ -75,8 +77,12 @@ ul {
 }
 
 
-li:hover ul {
-    animation:0;
+ ul:hover .bandCardContainer {
+  
+   -webkit-animation-play-state: paused;
+   -moz-animation-play-state: paused;
+   -o-animation-play-state: paused;
+   animation-play-state: paused;
 }
 
  .buttonContainer {
@@ -86,7 +92,7 @@ li:hover ul {
      bottom:0;
      right:0;
       left: 84px;
-
+    
       top: 93px;
  }
 
@@ -176,7 +182,7 @@ li:hover ul {
 @keyframes scrollAlbumUp {
     0% {
  
-        transform: translateY(-1000px);
+        transform: translateY(-800px);
     }
     5% {
       
