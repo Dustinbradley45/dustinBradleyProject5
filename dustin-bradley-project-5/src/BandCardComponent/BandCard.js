@@ -1,14 +1,44 @@
 import React, { Component } from 'react';
 
-
-// MAP OVER DATA AND APPEND AS PER BELOW;
-// <this className="state band"></this>
 class BandCard extends Component {
-   
-   
+    constructor() {
+        super();
+        this.state = {
+            like: 0,
+            dislike:0
+        }
+    }
+    // onMouseOver = () => {
+    //    elementID.css({})
+    // }
+
+    addLike = (e) => {
+        return (
+            () => {
+                const likeCounter = this.state.like + 1;
+
+                this.setState({
+                    like: likeCounter
+                });
+            })
+    }
+
+    addDislike = (e) => {
+        return (
+            () => {
+                const dislikeCounter = this.state.dislike + 1;
+
+                this.setState({
+                    dislike:dislikeCounter
+                })
+            }
+        )
+    }
+
     render() {
-      
+
         
+
         return (
             <ul>
                 {
@@ -18,38 +48,39 @@ class BandCard extends Component {
                                 <img src={albumInfo.albumImgUrl} alt=''></img>
                                 <div className='overlay'>
                                     <h4>{albumInfo.albumBandName}</h4>
-                                    {
-                                        albumInfo.map((checkButton, i => {
-                                            return (
-                                                <div className="buttonContainer" key={i}>
-                                                    <div className="removeCustomButton">
-                                                        <div className="buttonBackground">
-                                                            <button className="removeButton"
-                                                                type='button'
-                                                                onClick={() => this.props.removeAlbum(checkButton.i)}>
-                                                                Remove
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )
-                                        }
-                                        ))
-                                    }
+
+                                    <div className="buttonContainer" key={i}>
+                                        <div className="removeCustomButton">
+                                            <div className="buttonBackground">
+                                                <button className="removeButton"
+                                                    type='button'
+                                                    >
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="likesContainer">
+                                        <button className='likeTheAlbum' onClick={this.addLike()}>
+                                            LIKE
+                                        </button>
+                                        <button className='dislikeTheAlbum' onClick={this.addDislike()}>
+                                            DISLIKE
+                                        </button>
+                                    </div>
+
                                 </div>
                             </li>
+                         )
+                        }
                         )
                     }
-             
-                    )
-                    
-                }
-                )
-            }
-            </ul>
+            </ul>    
         )
-    }
-}
+    }                
+ }
+
+
     
 
 

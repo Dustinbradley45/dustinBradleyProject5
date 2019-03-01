@@ -12,7 +12,7 @@ header {
        text-transform:lowercase;
        width:100%;
        padding:0;
-       margin-bottom:35px;
+       margin-bottom:45px;
    }
 
    &:hover,
@@ -85,3 +85,25 @@ button {
     }
 }
 
+select {
+    background-color: $primaryColor;
+    color: $secondaryColor;
+    text-align: center;
+    border: none;
+    padding: 3px;
+    @include font($primaryFont, 1rem, 300);
+    -moz-appearance: none;
+
+    &:focus,
+    &:hover {
+        border-bottom: 1px solid $secondaryColor;
+    }
+
+    .caretDown {
+        height: 10px;
+        width:10px;
+        background-color: $secondaryColor;
+    }
+
+   
+}

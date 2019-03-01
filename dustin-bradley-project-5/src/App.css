@@ -257,7 +257,7 @@ header h1 {
   text-transform: lowercase;
   width: 100%;
   padding: 0;
-  margin-bottom: 35px;
+  margin-bottom: 45px;
 }
 
 header:hover, header:focus {
@@ -335,6 +335,28 @@ button:hover, button:focus-within {
   background-color: #ff5c4e;
 }
 
+select {
+  background-color: #002a45;
+  color: #ff7367;
+  text-align: center;
+  border: none;
+  padding: 3px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  -moz-appearance: none;
+}
+
+select:focus, select:hover {
+  border-bottom: 1px solid #ff7367;
+}
+
+select .caretDown {
+  height: 10px;
+  width: 10px;
+  background-color: #ff7367;
+}
+
 main {
   margin: 0 4rem;
   height: 80vh;
@@ -359,6 +381,8 @@ ul {
           align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  -webkit-animation: scrollAlbumUp 50s linear infinite;
+          animation: scrollAlbumUp 50s linear infinite;
 }
 
 .bandCardContainer {
@@ -412,31 +436,15 @@ ul {
   left: 0;
   right: 0;
   bottom: 0;
-  display: none;
+  opacity: 0;
   font-family: "Open Sans", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   margin: 15px;
 }
 
-select {
-  background-color: #002a45;
-  color: #ff7367;
-  text-align: center;
-  border: none;
-  padding: 3px;
-  font-family: "Open Sans", sans-serif;
-  font-size: 1rem;
-  font-weight: 300;
-  -moz-appearance: none;
-}
-
-select:focus, select:hover {
-  border-bottom: 1px solid #ff7367;
-}
-
 .bandCardContainer:hover .overlay {
-  display: block;
+  opacity: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -451,6 +459,11 @@ select:focus, select:hover {
       -ms-flex-align: center;
           align-items: center;
   color: #002a45;
+}
+
+li:hover ul {
+  -webkit-animation: 0;
+          animation: 0;
 }
 
 .buttonContainer {
@@ -540,22 +553,24 @@ select:focus, select:hover {
   opacity: 0;
 }
 
+.likeTheAlbum,
+.dislikeTheAlbum {
+  background-color: #002a45;
+  margin: 5px;
+}
+
 @-webkit-keyframes scrollAlbumUp {
   0% {
-    opacity: 1;
     -webkit-transform: translateY(-1000px);
             transform: translateY(-1000px);
   }
   5% {
-    opacity: 1;
   }
   50% {
-    opacity: 1;
     -webkit-transform: translateY(0px);
             transform: translateY(0px);
   }
   100% {
-    opacity: 0;
     -webkit-transform: translateY(800px);
             transform: translateY(800px);
   }
@@ -563,20 +578,16 @@ select:focus, select:hover {
 
 @keyframes scrollAlbumUp {
   0% {
-    opacity: 1;
     -webkit-transform: translateY(-1000px);
             transform: translateY(-1000px);
   }
   5% {
-    opacity: 1;
   }
   50% {
-    opacity: 1;
     -webkit-transform: translateY(0px);
             transform: translateY(0px);
   }
   100% {
-    opacity: 0;
     -webkit-transform: translateY(800px);
             transform: translateY(800px);
   }

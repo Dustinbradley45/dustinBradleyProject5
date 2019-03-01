@@ -6,6 +6,7 @@ import Header from './HeaderComponents/Header.js';
 import BandCard from './BandCardComponent/BandCard.js';
 import Footer from './FooterComponents/Footer.js';
 
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +18,7 @@ class App extends Component {
       isHidden:false
     }
   }
+  
   checkUserResponse = (e) => {
     this.setState({
       userChoice: e.target.value
@@ -33,7 +35,6 @@ class App extends Component {
       const dbRef = firebase.database().ref();
       dbRef.push(playlistItem);
     });
-
   };
 
     removeAlbum = (e) => {
@@ -57,16 +58,13 @@ class App extends Component {
          bandInfo: newArray
         })
       }
-    }
-    )
+    })
   }
 
   toggleHidden = (e) => {
     this.setState({
       isHidden: !this.state.isHidden
     })
-    console.log('hello world')
-    
   }
   
   useChoiceData = () => {
@@ -126,12 +124,10 @@ class App extends Component {
           initialResponse={this.state.results}
           toggleHidden={this.state.isHidden}
           checkUserResponse={this.checkUserResponse}
-         
           />
         <main>
           <BandCard
             bandInfo={this.state.bandInfo}
-            removeAlbum={this.removeAlbum}
             />
         </main>
         <Footer /> 
