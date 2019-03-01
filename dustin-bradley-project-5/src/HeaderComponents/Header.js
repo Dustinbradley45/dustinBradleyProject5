@@ -19,24 +19,24 @@ class Header extends Component {
                     <h1>This thing I made.</h1>
                 </div>
                 <nav>
+                        {!this.props.toggleHidden &&
+                          
                     <form action="submit" onSubmit={this.props.submitHandler}>
-                        <input
-                            type="text"
-                            placeholder='Search By Artist' name='artistQuery'
-                            onChange={this.props.changeHandler} />
-                        <button type="submit" toggleHidden={this.props.isHidden}>Submit</button>
-                        {
-                           !this.props.isHidden ? console.log('cat') : null
-                        }
+                                <input
+                                    type="text"
+                                    placeholder='Search By Artist' name='artistQuery'
+                                    onChange={this.props.changeHandler} />
+                                <button type="submit">Submit</button>
                     </form>
-                {this.props.initialResponse.length > 0 ? 
+                          
+                    }
+                {this.props.initialResponse.length > 0 && 
                     <select>
                         {this.props.initialResponse.map((options, i) => {
                             return <option key={i} onClick={this.props.checkUserResponse}>{options.name}</option>
                             })
                         }
                     </select>
-                    : null
                     }
                 </nav>
                 

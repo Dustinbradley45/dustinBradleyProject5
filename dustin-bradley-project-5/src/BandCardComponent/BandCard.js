@@ -19,8 +19,10 @@ class BandCard extends Component {
                     
                             return (
                                 <li className='bandCardContainer' key={i}>
-                                    <img src={albumInfo.albumImgUrl} alt=''></img>
-                                    <h4>{albumInfo.albumBandName}</h4>
+                                        <img src={albumInfo.albumImgUrl} alt=''></img>
+                                    <div className= 'overlay'>
+                                        <h4>{albumInfo.albumBandName}</h4>
+                                    </div>
                                 </li>
                             )
                         }

@@ -11,10 +11,10 @@ class App extends Component {
     super(props);
     this.state = {
       artistQuery: '',
-      results: '',
+      results: [],
       userChoice: '',
       bandInfo: [],
-      isHidden:'false'
+      isHidden:false
     }
   }
   checkUserResponse = (e) => {
@@ -56,10 +56,12 @@ class App extends Component {
     )
   }
 
-  toggleHidden = () => {
+  toggleHidden = (e) => {
     this.setState({
       isHidden: !this.state.isHidden
     })
+    console.log('hello world')
+    
   }
 
 
@@ -98,8 +100,10 @@ class App extends Component {
       e.preventDefault();
       const userQuery = this.state.artistQuery
       this.search(userQuery);
+      console.log(userQuery);
       this.setState({
-        text:''
+        text: '',
+        isHidden: !this.state.isHidden
       });
     }
 
@@ -117,12 +121,11 @@ class App extends Component {
       }).then((response) => {
        
         const userResponse = response.data.results.albummatches.album
-        console.log(userResponse)
 
         const userResponseWithImage = userResponse.filter(withImages => {
           return withImages.image[0]['#text'].length > 0 
         })
-       console.log(userResponseWithImage)
+       
         this.setState({
           results: userResponseWithImage,
         })
@@ -136,7 +139,7 @@ class App extends Component {
           changeHandler={this.changeHandler}
           submitHandler={this.submitHandler}
           initialResponse={this.state.results}
-          toggleHidden={this.state.toggleHidden}
+          toggleHidden={this.state.isHidden}
           checkUserResponse={this.checkUserResponse}
          
           />
