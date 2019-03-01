@@ -36,6 +36,11 @@ class App extends Component {
 
   };
 
+    removeAlbum = (e) => {
+      const dbRef = firebase.database().ref();
+      dbRef.remove();
+    }
+
   componentDidMount() {
     const dbRef = firebase.database().ref();
     dbRef.on('value', response => {
@@ -63,26 +68,6 @@ class App extends Component {
     console.log('hello world')
     
   }
-
-
-    // fetchChoiceData = () => {
-    //   const dbRef = firebase.database().ref();
-    //   dbRef.on('value', response => {
-    //     const fetchedData = [];
-    //     const data = response.val();
-
-    //     for (let key in data) {
-    //       fetchedData.push({
-    //         key: key,
-    //         title: data[key]
-    //       })
-    //     }
-     
-    //     this.setState({
-    //       clickedData: fetchedData
-    //     });
-    //   })
-    // }
   
   useChoiceData = () => {
     this.state.clickedData.map(album => {
@@ -146,6 +131,7 @@ class App extends Component {
         <main>
           <BandCard
             bandInfo={this.state.bandInfo}
+            removeAlbum={this.removeAlbum}
             />
         </main>
         <Footer /> 

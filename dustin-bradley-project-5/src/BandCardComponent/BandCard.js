@@ -1,40 +1,56 @@
 import React, { Component } from 'react';
-import ScrollReveal from 'scrollreveal';
+
 
 // MAP OVER DATA AND APPEND AS PER BELOW;
 // <this className="state band"></this>
 class BandCard extends Component {
-    constructor() {
-        super();
-        
-        ScrollReveal().reveal('.bandCardContainer')
-    }
+   
    
     render() {
+      
         
         return (
             <ul>
-                 {
+                {
                     this.props.bandInfo.map((albumInfo, i) => {
-                    
-                            return (
-                                <li className='bandCardContainer' key={i}>
-                                        <img src={albumInfo.albumImgUrl} alt=''></img>
-                                    <div className= 'overlay'>
-                                        <h4>{albumInfo.albumBandName}</h4>
-                                    </div>
-                                </li>
-                            )
-                        }
+                        return (
+                            <li className='bandCardContainer' key={i}>
+                                <img src={albumInfo.albumImgUrl} alt=''></img>
+                                <div className='overlay'>
+                                    <h4>{albumInfo.albumBandName}</h4>
+                                    {
+                                        albumInfo.map((checkButton, i => {
+                                            return (
+                                                <div className="buttonContainer" key={i}>
+                                                    <div className="removeCustomButton">
+                                                        <div className="buttonBackground">
+                                                            <button className="removeButton"
+                                                                type='button'
+                                                                onClick={() => this.props.removeAlbum(checkButton.i)}>
+                                                                Remove
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                        ))
+                                    }
+                                </div>
+                            </li>
+                        )
+                    }
              
-                     )
+                    )
                     
                 }
+                )
+            }
             </ul>
         )
     }
 }
-
+    
 
 
 
