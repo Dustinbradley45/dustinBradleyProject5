@@ -11,13 +11,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loadingScreen:false,
       artistQuery: '',
       results: [],
       userChoice: '',
       bandInfo: [],
       isHidden: false,
-      like: 0,
-      dislike: 0
+      like: 1,
+      dislike: 1,
+      keys: []
     }
   }
 
@@ -32,8 +34,6 @@ class App extends Component {
       const playlistItem = {
         bandUrl: albumChoice[0].image[3]['#text'],
         bandName: albumChoice[0].name,
-        likes: 0,
-        dislikes: 0
       };
 
       const dbRef = firebase.database().ref();
@@ -41,44 +41,41 @@ class App extends Component {
     });
   };
 
-      addLike = (e) => {
-        return (
-          () => {
-            const likeCounter = this.state.like + 1;
-            this.setState({
-              like: likeCounter
-            });
-
-            for (let album in this.state.bandInfo) {
-              const dbRef = firebase.database().ref('album/' + album.likes).set({
-                likes: this.state.likes + 1
-              });
-              
-              dbRef.push(this.state.like);
-              
-            }
-            console.log(this.state.like);
-
-          })
-      }
-
-      addDislike = (e) => {
-        return (
-          () => {
-            const dislikeCounter = this.state.dislike + 1;
-
-            this.setState({
-              dislike: dislikeCounter
-            }) 
-          }
-        )
-      }
+  addLike = (key) => {
+        
+    const likeCounter = this.state.like + 1;
    
+    this.setState({
+      like: likeCounter
+    });
 
-    removeAlbum = (e) => {
-      const dbRef = firebase.database().ref( );
-      dbRef.remove();
-    }
+    const dbRef = firebase.database().ref(`${key}/`);
+    dbRef.update({
+     like: this.state.like
+    })          
+  }
+
+  addDislike = (key) => {
+    
+  const dislikeCounter = this.state.dislike + 1;
+
+        this.setState({
+          dislike: dislikeCounter
+        }) 
+    
+    const dbRef = firebase.database().ref(`${key}/`);
+    dbRef.update({
+      dislike: this.state.dislike
+    }) 
+  }
+        
+      
+   
+    
+  removeAlbum = (key) => {
+    const dbRef = firebase.database().ref(`${key}`);
+    dbRef.remove();
+  }
 
   componentDidMount() {
     const dbRef = firebase.database().ref();
@@ -87,14 +84,14 @@ class App extends Component {
       const newArray = [];
       const data = response.val();
 
-      for (let album in data) {
+      for (let key in data) {
         newArray.push({
-          albumImgUrl : data[album].bandUrl,
-          albumBandName: data[album].bandName,
-          albumKey: album,
+          albumImgUrl : data[key].bandUrl,
+          albumBandName: data[key].bandName,
+          albumKey: key,
           
-        })
-     
+        });
+        
         this.setState({
          bandInfo: newArray
         })
@@ -124,7 +121,7 @@ class App extends Component {
       e.preventDefault();
       const userQuery = this.state.artistQuery
       this.search(userQuery);
-      console.log(userQuery);
+
       this.setState({
         text: '',
         isHidden: !this.state.isHidden
@@ -143,6 +140,7 @@ class App extends Component {
           api_key: 'd2765512b20f78bf45d71651adbe2075'
         })
       }).then((response) => {
+
        
         const userResponse = response.data.results.albummatches.album
 
@@ -169,12 +167,12 @@ class App extends Component {
         <main>
           <BandCard
             bandInfo={this.state.bandInfo}
-            addLike={this.addLike}
             removeAlbum={this.removeAlbum}
-            addDislike={this.addDislike}
+            addLike={this.addLike}
             likes={this.state.likes}
+            addDislike={this.addDislike}
             dislikes={this.state.dislikes}
-            stopAnimation={this.stopAnimation}
+
             />
         </main>
         <Footer /> 

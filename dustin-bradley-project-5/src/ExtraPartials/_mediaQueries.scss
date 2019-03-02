@@ -1,0 +1,32 @@
+
+
+@media #{$lgPhone} {
+   header {
+       h1 {
+           font-size: 3rem;
+           margin-bottom:4rem;
+       }
+
+   } 
+}
+
+@media #{$medPhone} {
+    main {
+        margin: 0 2rem;
+    }
+}
+
+@media #{$smPhone} {
+    header {
+        header {
+            height: 13vh;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+    }
+    main {
+        margin: 0 1rem;
+    }
+}
