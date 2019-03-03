@@ -1,6 +1,6 @@
 main {
    margin: 0 4rem;
-   height: 80vh;
+//    height: 80vh;
    overflow:hidden;
    transition: .2s height linear;
 }
@@ -9,6 +9,7 @@ ul {
 
     @include flex(row, center,center);
     flex-wrap: wrap;
+    margin-top:9rem;
 
 
 }
@@ -19,7 +20,7 @@ ul {
     text-align:center;
     padding: 15px;
     position:relative;
-    // animation: scrollAlbumUp 50s linear infinite;
+    // animation: scrollAlbumUp 20s linear infinite;
     transition: .3s all linear;
  
     img{
@@ -40,7 +41,7 @@ ul {
    }
 
    a {
-       border: 1px solid $secondaryColor;
+    //    border: 1px solid $secondaryColor;
        @include font ($primaryFont, 20px, 300);
        padding: 5px;
        margin: 10px;
@@ -48,29 +49,42 @@ ul {
        transition: .2s all linear;
 
         &:hover {
-            background-color: $secondaryColor;
+            // background-color: $secondaryColor;
             color:$primaryColor;
         }
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
         transform:scale(1.1);
     }
 }
 
 .overlay {
-    background-color:rgba(255,255,255,.5);
+    background-image:(linear-gradient(50deg, rgba(0, 42, 69, 0.6) 15%,rgba(lighten($primaryColor,10%),.6) 30%, rgba(255, 255, 255, 0.6) 80%));
     position:absolute;
     top:0;
     left:0;
     right:0;
     bottom:0;
     opacity:0;
-    @include font($primaryFont, 1rem, 400);
+    @include font($primaryFont, 1rem, 600);
     margin: 15px;
 }
 
-.bandCardContainer:hover .overlay{
+i {
+    color: $primaryColor;
+   font-size: 1.5rem;
+
+    &:hover,
+    &:focus {
+        color:$secondaryColor;
+    }
+    
+}
+
+.bandCardContainer:hover .overlay,
+.bandCardContainer:focus-within .overlay{
     opacity:1;
     @include flex(column, center,center);
     color: $primaryColor;
@@ -86,14 +100,13 @@ ul {
 }
 
  .buttonContainer {
-     position: relative;
+     position: absolute;
      height: 50px;
      width: 50px;
      bottom:0;
      right:0;
-      left: 84px;
-    
-      top: 93px;
+      left:0;
+  
  }
 
 
@@ -101,12 +114,13 @@ ul {
  .removeCustomButton:after,
  .removeCustomButton:before {
      content: '';
-     background-color: black;
-     width: 30px;
-     height:4px;
+   
+     width: 2rem;
+     height:3px;
      /* padding: 3px; */
      margin: 10px;
      position: absolute;
+     left:0;
   
  }
 
@@ -115,8 +129,8 @@ ul {
      height: 3px;
      background-color:transparent;
      position: absolute;
-     left:-16px;
-     top: -3px;
+     left:0;
+     top: 7px;
      z-index: -1;
      transition:.3s all linear;
      opacity:0;
@@ -135,10 +149,12 @@ ul {
 
  .removeCustomButton:after {
     transition:.2s all linear;
+      background-color: $secondaryColor;
  }
 
  .removeCustomButton:before {
      transition: 1s all linear;
+       background-color: $secondaryColor;
  }
 
  .removeCustomButton:before {
@@ -175,9 +191,21 @@ ul {
 
 .likeTheAlbum,
 .dislikeTheAlbum {
-    background-color: $primaryColor;
-    margin: 5px;
+    background-color: transparent;
+    border:none;
+    margin:20px;
+
+    &:hover,
+    &:focus {
+ 
+        color: $secondaryColor;
+        background-color:transparent;
+        border:none;
+
+    }
 }
+
+
 
 @keyframes scrollAlbumUp {
     0% {

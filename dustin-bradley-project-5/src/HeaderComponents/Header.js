@@ -23,10 +23,13 @@ class Header extends Component {
 
                     {
                         this.props.initialResponse.length > 0 && 
+                       
                             <select>
                                 <option value="chooseAlbum">- - - Choose Album - - -</option>
-                                {
-                                    this.props.initialResponse.map((options, i) => {
+                            {
+                                
+                                this.props.initialResponse.map((options, i) => {
+                                        
                                         return <option key={i} onClick={this.props.checkUserResponse}>{options.name}</option>
                                         })
                                  }

@@ -248,6 +248,8 @@ header {
   -webkit-transition: .3s height linear;
   transition: .3s height linear;
   overflow: hidden;
+  position: fixed;
+  width: 87%;
 }
 
 header h1 {
@@ -367,7 +369,6 @@ select .caretDown {
 
 main {
   margin: 0 4rem;
-  height: 80vh;
   overflow: hidden;
   -webkit-transition: .2s height linear;
   transition: .2s height linear;
@@ -389,6 +390,7 @@ ul {
           align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  margin-top: 9rem;
 }
 
 .bandCardContainer {
@@ -421,7 +423,6 @@ ul {
 }
 
 .bandCardContainer a {
-  border: 1px solid #ff7367;
   font-family: "Open Sans", sans-serif;
   font-size: 20px;
   font-weight: 300;
@@ -433,17 +434,16 @@ ul {
 }
 
 .bandCardContainer a:hover {
-  background-color: #ff7367;
   color: #002a45;
 }
 
-.bandCardContainer:hover {
+.bandCardContainer:hover, .bandCardContainer:focus {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
 }
 
 .overlay {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-image: linear-gradient(50deg, rgba(0, 42, 69, 0.6) 15%, rgba(0, 73, 120, 0.6) 30%, rgba(255, 255, 255, 0.6) 80%);
   position: absolute;
   top: 0;
   left: 0;
@@ -452,11 +452,21 @@ ul {
   opacity: 0;
   font-family: "Open Sans", sans-serif;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 600;
   margin: 15px;
 }
 
-.bandCardContainer:hover .overlay {
+i {
+  color: #002a45;
+  font-size: 1.5rem;
+}
+
+i:hover, i:focus {
+  color: #ff7367;
+}
+
+.bandCardContainer:hover .overlay,
+.bandCardContainer:focus-within .overlay {
   opacity: 1;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -480,24 +490,23 @@ ul:hover .bandCardContainer {
 }
 
 .buttonContainer {
-  position: relative;
+  position: absolute;
   height: 50px;
   width: 50px;
   bottom: 0;
   right: 0;
-  left: 84px;
-  top: 93px;
+  left: 0;
 }
 
 .removeCustomButton:after,
 .removeCustomButton:before {
   content: '';
-  background-color: black;
-  width: 30px;
-  height: 4px;
+  width: 2rem;
+  height: 3px;
   /* padding: 3px; */
   margin: 10px;
   position: absolute;
+  left: 0;
 }
 
 .buttonBackground {
@@ -505,8 +514,8 @@ ul:hover .bandCardContainer {
   height: 3px;
   background-color: transparent;
   position: absolute;
-  left: -16px;
-  top: -3px;
+  left: 0;
+  top: 7px;
   z-index: -1;
   -webkit-transition: .3s all linear;
   transition: .3s all linear;
@@ -530,11 +539,13 @@ ul:hover .bandCardContainer {
 .removeCustomButton:after {
   -webkit-transition: .2s all linear;
   transition: .2s all linear;
+  background-color: #ff7367;
 }
 
 .removeCustomButton:before {
   -webkit-transition: 1s all linear;
   transition: 1s all linear;
+  background-color: #ff7367;
 }
 
 .removeCustomButton:before {
@@ -568,8 +579,17 @@ ul:hover .bandCardContainer {
 
 .likeTheAlbum,
 .dislikeTheAlbum {
-  background-color: #002a45;
-  margin: 5px;
+  background-color: transparent;
+  border: none;
+  margin: 20px;
+}
+
+.likeTheAlbum:hover, .likeTheAlbum:focus,
+.dislikeTheAlbum:hover,
+.dislikeTheAlbum:focus {
+  color: #ff7367;
+  background-color: transparent;
+  border: none;
 }
 
 @-webkit-keyframes scrollAlbumUp {
@@ -632,7 +652,7 @@ footer {
   text-align: center;
   z-index: 100;
   background-color: #002a45;
-  height: 5vh;
+  height: 5%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

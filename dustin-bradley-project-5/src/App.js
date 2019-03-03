@@ -17,8 +17,8 @@ class App extends Component {
       userChoice: '',
       bandInfo: [],
       isHidden: false,
-      like: 1,
-      dislike: 1,
+      like: 0,
+      dislike: 0,
       keys: []
     }
   }
@@ -34,6 +34,10 @@ class App extends Component {
       const playlistItem = {
         bandUrl: albumChoice[0].image[3]['#text'],
         bandName: albumChoice[0].name,
+        artistName: albumChoice[0].artist,
+        albumUrl:albumChoice[0].url,
+        like: 0,
+        dislike: 0,
       };
 
       const dbRef = firebase.database().ref();
@@ -81,20 +85,27 @@ class App extends Component {
     const dbRef = firebase.database().ref();
     dbRef.on('value', response => {
     
-      const newArray = [];
+      const newArray = [];  
       const data = response.val();
 
       for (let key in data) {
         newArray.push({
           albumImgUrl : data[key].bandUrl,
           albumBandName: data[key].bandName,
+          artistName: data[key].artistName,
+          albumUrl: data[key].albumUrl,
+          albumLikes: data[key].like,
+          albumDislikes: data[key].dislike,
           albumKey: key,
           
         });
+
         
         this.setState({
          bandInfo: newArray
         })
+
+        console.log(this.state.bandInfo)
       }
     })
   }
@@ -151,6 +162,8 @@ class App extends Component {
         this.setState({
           results: userResponseWithImage,
         })
+
+        console.log(this.state.results);
       })
     }
 

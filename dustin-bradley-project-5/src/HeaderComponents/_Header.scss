@@ -6,6 +6,8 @@ header {
    border-bottom: 2px solid $secondaryColor;
    transition: .3s height linear;
    overflow:hidden;
+   position:fixed;
+   width:87%;
     
    
    h1 {
