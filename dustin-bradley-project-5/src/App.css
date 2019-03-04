@@ -245,23 +245,23 @@ a {
 }
 
 header {
-  z-index: 100;
-  background-color: #002a45;
+  overflow: hidden;
+  width: 100%;
   height: 15vh;
+  z-index: 100;
+  position: fixed;
+  background-color: #002a45;
+  border-bottom: 2px solid #ff7367;
   -webkit-transition: .3s height linear;
   transition: .3s height linear;
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
-  border-bottom: 2px solid #ff7367;
 }
 
 header h1 {
+  width: 100%;
   font-family: "Open Sans", sans-serif;
   font-size: 4rem;
   font-weight: 300;
   text-transform: lowercase;
-  width: 100%;
   padding: 0;
   margin: 0;
   text-align: right;
@@ -272,7 +272,6 @@ header:hover, header:focus {
 }
 
 .headerContainer {
-  width: 90.25%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -307,10 +306,13 @@ nav input {
 nav input:focus-within {
   border-bottom: 1px solid #ff7367;
   -webkit-box-shadow: 0px 0px 10px 1px rgba(255, 115, 103, 0.75);
-  box-shadow: 0px 0px 10px 1px rgba(255, 115, 103, 0.75);
+          box-shadow: 0px 0px 10px 1px rgba(255, 115, 103, 0.75);
 }
 
 .headerLeft {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
       -ms-flex-direction: row-reverse;
@@ -324,11 +326,11 @@ nav input:focus-within {
 }
 
 nav {
+  -webkit-transform: translateY(2.5rem);
+          transform: translateY(2.5rem);
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
-  -webkit-transform: translateY(2.5rem);
-          transform: translateY(2.5rem);
 }
 
 nav ul {
@@ -377,17 +379,17 @@ form {
 }
 
 form button {
-  background: transparent;
-  color: #ff7367;
   width: 100%;
-  border: 1px solid #ff7367;
-  -webkit-transition: .1s all linear;
-  transition: .1s all linear;
-  padding: 5px 10px;
   margin-top: 1rem;
+  padding: 5px 10px;
   font-family: "Open Sans", sans-serif;
   font-size: 1rem;
   font-weight: 300;
+  background: transparent;
+  border: 1px solid #ff7367;
+  color: #ff7367;
+  -webkit-transition: .1s all linear;
+  transition: .1s all linear;
 }
 
 form button:hover, form button:focus-within {
@@ -411,13 +413,7 @@ select {
 select:focus, select:hover {
   border-bottom: 1px solid #ff7367;
   -webkit-box-shadow: 0px 0px 15px 5px rgba(255, 115, 103, 0.75);
-  box-shadow: 0px 0px 15px 5px rgba(255, 115, 103, 0.75);
-}
-
-select .caretDown {
-  height: 10px;
-  width: 10px;
-  background-color: #ff7367;
+          box-shadow: 0px 0px 15px 5px rgba(255, 115, 103, 0.75);
 }
 
 .fa-compact-disc {
@@ -454,7 +450,7 @@ main {
   transition: .2s height linear;
 }
 
-ul {
+main ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -475,10 +471,10 @@ ul {
 
 .bandCardContainer {
   margin: 1rem;
-  border: 2px solid #ff7367;
-  text-align: center;
-  padding: 15px;
   position: relative;
+  padding: 15px;
+  text-align: center;
+  border: 2px solid #ff7367;
   -webkit-transition: .15s all linear;
   transition: .15s all linear;
 }
@@ -517,23 +513,32 @@ ul {
   color: #002a45;
 }
 
-.bandCardContainer:hover, .bandCardContainer:focus {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+.bandCardContainer h4,
+.bandCardContainer h5 {
+  padding: 0;
+  margin: 0;
+}
+
+.bandCardContainer h4 {
+  font-size: 1.5rem;
+}
+
+.bandCardContainer h5 {
+  font-size: 1.3rem;
 }
 
 .overlay {
-  background-image: linear-gradient(50deg, rgba(0, 42, 69, 0.6) 15%, rgba(0, 73, 120, 0.6) 30%, rgba(255, 255, 255, 0.6) 80%);
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   opacity: 0;
+  margin: 15px;
   font-family: "Open Sans", sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  margin: 15px;
+  background-image: linear-gradient(50deg, rgba(0, 42, 69, 0.6) 15%, rgba(0, 73, 120, 0.6) 30%, rgba(255, 255, 255, 0.6) 80%);
   -webkit-transition: .15s opacity linear;
   transition: .15s opacity linear;
 }
@@ -586,15 +591,10 @@ i:hover, i:focus-within {
   color: #002a45;
 }
 
-ul:hover .bandCardContainer {
-  -webkit-animation-play-state: paused;
-  animation-play-state: paused;
-}
-
 .buttonContainer {
-  position: absolute;
   height: 50px;
   width: 50px;
+  position: absolute;
   bottom: 0;
   right: 0;
   left: 0;
@@ -603,51 +603,31 @@ ul:hover .bandCardContainer {
 .removeCustomButton:after,
 .removeCustomButton:before {
   content: '';
+  position: absolute;
   width: 2rem;
   height: 3px;
-  /* padding: 3px; */
   margin: 10px;
-  position: absolute;
   left: 0;
+  background-color: #ff7367;
 }
 
 .buttonBackground {
   width: 3px;
   height: 3px;
-  background-color: transparent;
   position: absolute;
   left: -3px;
   top: 7px;
   z-index: -1;
+  background-color: transparent;
+  opacity: 0;
   -webkit-transition: .3s all linear;
   transition: .3s all linear;
-  opacity: 0;
 }
 
 .buttonBackground button {
   font-family: "Open Sans", sans-serif;
   font-size: 1rem;
   font-weight: 400;
-}
-
-.buttonContainer:hover .buttonBackground {
-  -webkit-transform: scale(1.1, 1.1);
-          transform: scale(1.1, 1.1);
-  z-index: 1;
-  opacity: 1;
-  background-color: rgba(0, 42, 69, 0.8);
-}
-
-.removeCustomButton:after {
-  -webkit-transition: .2s all linear;
-  transition: .2s all linear;
-  background-color: #ff7367;
-}
-
-.removeCustomButton:before {
-  -webkit-transition: 1s all linear;
-  transition: 1s all linear;
-  background-color: #ff7367;
 }
 
 .removeCustomButton:before {
@@ -663,6 +643,16 @@ ul:hover .bandCardContainer {
   top: 14px;
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
+  -webkit-transition: .2s all linear;
+  transition: .2s all linear;
+}
+
+.buttonContainer:hover .buttonBackground {
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
+  z-index: 1;
+  opacity: 1;
+  background-color: rgba(0, 42, 69, 0.8);
 }
 
 .buttonContainer:hover .removeCustomButton:after {
@@ -694,67 +684,9 @@ ul:hover .bandCardContainer {
   background-color: transparent;
 }
 
-@-webkit-keyframes scrollAlbumUp {
-  0% {
-    -webkit-transform: translateY(-800px);
-            transform: translateY(-800px);
-  }
-  5% {
-  }
-  50% {
-    -webkit-transform: translateY(0px);
-            transform: translateY(0px);
-  }
-  100% {
-    -webkit-transform: translateY(800px);
-            transform: translateY(800px);
-  }
-}
-
-@keyframes scrollAlbumUp {
-  0% {
-    -webkit-transform: translateY(-800px);
-            transform: translateY(-800px);
-  }
-  5% {
-  }
-  50% {
-    -webkit-transform: translateY(0px);
-            transform: translateY(0px);
-  }
-  100% {
-    -webkit-transform: translateY(800px);
-            transform: translateY(800px);
-  }
-}
-
-@-webkit-keyframes fadeout {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes fadeout {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 footer {
-  font-family: "Open Sans Condensed", sans-serif;
-  font-size: 0.4rem;
-  font-weight: 300;
-  border-top: 2px solid #ff7367;
-  text-align: center;
-  z-index: 100;
-  background-color: #002a45;
   height: 5%;
+  z-index: 100;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -768,10 +700,15 @@ footer {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  text-align: center;
+  border-top: 2px solid #ff7367;
+  background-color: #002a45;
 }
 
 footer p {
+  font-family: "Open Sans Condensed", sans-serif;
   font-size: 1rem;
+  font-weight: 300;
 }
 
 @media only screen and (max-width: 520px) {
@@ -782,12 +719,10 @@ footer p {
     height: 11vh;
     width: 100%;
     margin: 0 auto;
-    padding-top: 5rem;
   }
   header h1 {
     font-size: 3rem;
     text-align: center;
-    padding-top: 1rem;
   }
   header:hover, header:focus-within {
     height: 25vh;
@@ -807,7 +742,7 @@ footer p {
   nav input {
     width: 100%;
   }
-  button[type='submit'] {
+  button[type="submit"] {
     margin-top: 5px;
     width: 100%;
   }

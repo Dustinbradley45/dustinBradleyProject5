@@ -1,14 +1,13 @@
 footer {
-    @include font($secondaryFont, .4rem, 300);
-    border-top: 2px solid $secondaryColor;
-    text-align:center;
-    z-index: 100;
-    background-color: $primaryColor;
     height: 5%;
+    z-index: 100;
     @include flex(column, center, flex-start);
+    text-align:center;
+    border-top: 2px solid $secondaryColor;
+    background-color: $primaryColor;
     
     p {
-        font-size:1rem;
-       
+        @include font($secondaryFont, 1rem, 300);
+
     }
 }

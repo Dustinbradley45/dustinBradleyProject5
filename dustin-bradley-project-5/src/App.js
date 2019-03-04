@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import firebase from './firebase.js';
-import './App.css';
-import Header from './HeaderComponents/Header.js';
-import BandCard from './BandCardComponent/BandCard.js';
-import Footer from './FooterComponents/Footer.js';
+import React, { Component } from "react";
+import axios from "axios";
+import firebase from "./firebase.js";
+import "./App.css";
+import Header from "./HeaderComponents/Header.js";
+import BandCard from "./BandCardComponent/BandCard.js";
+import Footer from "./FooterComponents/Footer.js";
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loadingScreen:false,
-      artistQuery: '',
+      loadingScreen: false,
+      artistQuery: "",
       results: [],
-      userChoice: '',
+      userChoice: "",
       bandInfo: [],
       isHidden: false,
       like: 0,
       dislike: 0,
       keys: []
-    }
-  }
+    };
+  };
 
   checkUserResponse = (e) => {
     this.setState({
@@ -32,7 +32,7 @@ class App extends Component {
       });
 
       const playlistItem = {
-        bandUrl: albumChoice[0].image[3]['#text'],
+        bandUrl: albumChoice[0].image[3]["#text"],
         bandName: albumChoice[0].name,
         artistName: albumChoice[0].artist,
         albumUrl:albumChoice[0].url,
@@ -55,40 +55,40 @@ class App extends Component {
 
     const dbRef = firebase.database().ref(`${key}/`);
     dbRef.update({
-     like: this.state.like
-    })          
-  }
+      like: this.state.like
+    });
+  };
 
   addDislike = (key) => {
     
-  const dislikeCounter = this.state.dislike + 1;
+    const dislikeCounter = this.state.dislike + 1;
 
-        this.setState({
-          dislike: dislikeCounter
-        }) 
+    this.setState({
+      dislike: dislikeCounter
+    });
     
     const dbRef = firebase.database().ref(`${key}/`);
     dbRef.update({
       dislike: this.state.dislike
-    }) 
-  }
+    });
+  };
         
     
   removeAlbum = (key) => {
     const dbRef = firebase.database().ref(`${key}`);
     dbRef.remove();
-  }
+  };
 
   componentDidMount() {
     const dbRef = firebase.database().ref();
-    dbRef.on('value', response => {
+    dbRef.on("value", response => {
     
-      const newArray = [];  
+      const newArray = [];
       const data = response.val();
 
       for (let key in data) {
         newArray.push({
-          albumImgUrl : data[key].bandUrl,
+          albumImgUrl: data[key].bandUrl,
           albumBandName: data[key].bandName,
           artistName: data[key].artistName,
           albumUrl: data[key].albumUrl,
@@ -100,70 +100,65 @@ class App extends Component {
 
         
         this.setState({
-         bandInfo: newArray
-        })
-
-        console.log(this.state.bandInfo)
-      }
-    })
-  }
+          bandInfo: newArray
+        });
+      };
+    });
+  };
 
   toggleHidden = (e) => {
     this.setState({
       isHidden: !this.state.isHidden
-    })
-  }
+    });
+  };
   
   useChoiceData = () => {
     this.state.clickedData.map(album => {
       return album.bandUrl, album.bandName
-    })
-  }
+    });
+  };
 
-    changeHandler = (e) => {
-      this.setState({
-        [e.target.name]: e.target.value
+  changeHandler = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  submitHandler = (e) => {
+    e.preventDefault();
+    const userQuery = this.state.artistQuery
+    this.search(userQuery);
+
+    this.setState({
+      text: "",
+      isHidden: !this.state.isHidden
+    });
+  };
+
+  search = (query) => {
+    axios({
+      method: "GET",
+      url: "http://ws.audioscrobbler.com/2.0/",
+      dataResponse: "json",
+      params: ({
+        method: "album.search",
+        album: query,
+        format: "json",
+        api_key: "d2765512b20f78bf45d71651adbe2075"
       })
-    }
+    }).then((response) => {
 
-    submitHandler = (e) => {
-      e.preventDefault();
-      const userQuery = this.state.artistQuery
-      this.search(userQuery);
+      const userResponse = response.data.results.albummatches.album
 
-      this.setState({
-        text: '',
-        isHidden: !this.state.isHidden
+      const userResponseWithImage = userResponse.filter(withImages => {
+        return withImages.image[0]["#text"].length > 0
       });
-    }
-
-    search = (query) => {
-      axios({
-        method: 'GET',
-        url: 'http://ws.audioscrobbler.com/2.0/',
-        dataResponse: 'json',
-        params: ({
-          method: 'album.search',
-          album: query,
-          format: 'json',
-          api_key: 'd2765512b20f78bf45d71651adbe2075'
-        })
-      }).then((response) => {
-
        
-        const userResponse = response.data.results.albummatches.album
-
-        const userResponseWithImage = userResponse.filter(withImages => {
-          return withImages.image[0]['#text'].length > 0 
-        })
-       
-        this.setState({
-          results: userResponseWithImage,
-        })
-
-        console.log(this.state.results);
-      })
-    }
+      this.setState({
+        results: userResponseWithImage,
+      });
+    });
+  };
 
   render() {
     return (
@@ -189,7 +184,7 @@ class App extends Component {
         <Footer /> 
       </div>
     );
-  }
-}
+  };
+};
 
 export default App;
