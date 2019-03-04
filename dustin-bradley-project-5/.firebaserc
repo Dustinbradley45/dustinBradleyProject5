@@ -1,5 +1,6 @@
 {
   "projects": {
-    "staging": "musiclist-c7483"
+    "staging": "musiclist-c7483",
+    "default": "musiclist-c7483"
   }
 }
