@@ -45,36 +45,7 @@ class App extends Component {
     });
   };
 
-  // FOR LIKE FUNCTION - NOT WORKING 100%
-  addLike = (key) => {
-        
-    const likeCounter = this.state.like + 1;
-   
-    this.setState({
-      like: likeCounter
-    });
-
-    const dbRef = firebase.database().ref(`${key}/`);
-    dbRef.update({
-      like: this.state.like
-    });
-  };
-
-  // FOR DISLIKE FUNCTION - ALSO NOT WORKING !100%
-  addDislike = (key) => {
-    
-    const dislikeCounter = this.state.dislike + 1;
-
-    this.setState({
-      dislike: dislikeCounter
-    });
-    
-    const dbRef = firebase.database().ref(`${key}/`);
-    dbRef.update({
-      dislike: this.state.dislike
-    });
-  };
-        
+  
     // REMOVE FUNCTION - WORKING
   removeAlbum = (key) => {
     const dbRef = firebase.database().ref(`${key}`);

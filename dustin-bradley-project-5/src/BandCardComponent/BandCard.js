@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import firebase from "./../firebase.js";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -25,6 +26,43 @@ AOS.init({
 });
 
 class BandCard extends Component {
+    constructor() {
+        super();
+        this.state = {
+            likes: 0,
+            dislikes: 0,
+        }
+    }
+
+    // FOR LIKE FUNCTION - NOT WORKING 100%
+    addLike = (key) => {
+
+        const likeCounter = this.state.likes + 1;
+
+        this.setState({
+            likes: likeCounter
+        });
+
+        const dbRef = firebase.database().ref(`${key}/`);
+        dbRef.update({
+            likes: this.state.likes
+        });
+    };
+
+    // FOR DISLIKE FUNCTION - ALSO NOT WORKING !100%
+    addDislike = (key) => {
+
+        const dislikeCounter = this.state.dislikes + 1;
+
+        this.setState({
+            dislikes: dislikeCounter
+        });
+
+        const dbRef = firebase.database().ref(`${key}/`);
+        dbRef.update({
+            dislikes: this.state.dislikes
+        });
+    };
 
     render() {
 
@@ -78,14 +116,14 @@ class BandCard extends Component {
                                     <div className="likesContainer">
                                         <button
                                             className="likeTheAlbum" aria-label="like this album"
-                                            onClick={() => this.props.addLike(albumInfo.albumKey)}>
+                                            onClick={() => this.addLike(albumInfo.albumKey)}>
                                             <i class="fas fa-heart" aria-hidden="true">
                                                 <p>{albumInfo.albumLikes}</p>
                                             </i>
                                         </button>
                                     
                                         <button className="dislikeTheAlbum" aria-label="dislike this album"
-                                        onClick={() => this.props.addDislike(albumInfo.albumKey)}>
+                                        onClick={() => this.addDislike(albumInfo.albumKey)}>
                                             <i class="far fa-thumbs-down" aria-hidden="true">
                                                 <p>{albumInfo.albumDislikes}</p>
                                             </i>
