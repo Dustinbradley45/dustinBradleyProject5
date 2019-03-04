@@ -45,6 +45,7 @@ class App extends Component {
     });
   };
 
+  // FOR LIKE FUNCTION - NOT WORKING 100%
   addLike = (key) => {
         
     const likeCounter = this.state.like + 1;
@@ -59,6 +60,7 @@ class App extends Component {
     });
   };
 
+  // FOR DISLIKE FUNCTION - ALSO NOT WORKING !100%
   addDislike = (key) => {
     
     const dislikeCounter = this.state.dislike + 1;
@@ -73,16 +75,18 @@ class App extends Component {
     });
   };
         
-    
+    // REMOVE FUNCTION - WORKING
   removeAlbum = (key) => {
     const dbRef = firebase.database().ref(`${key}`);
     dbRef.remove();
   };
 
   componentDidMount() {
+    // GET DATA FROM FIREBASE
     const dbRef = firebase.database().ref();
     dbRef.on("value", response => {
     
+      // THROW IN NEW ARRAY AND MAP OVER
       const newArray = [];
       const data = response.val();
 
@@ -106,24 +110,28 @@ class App extends Component {
     });
   };
 
+    // TO TOGGLE THE SELECT BUTTON 
   toggleHidden = (e) => {
     this.setState({
       isHidden: !this.state.isHidden
     });
   };
   
+  // TO RETURN AND GET THE INFO NEEDED FROM THE ARRAY STORED UNDER RESULT
   useChoiceData = () => {
     this.state.clickedData.map(album => {
       return album.bandUrl, album.bandName
     });
   };
 
+  // CHANGE HANDLER FOR FORM INPUT
   changeHandler = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
 
+  // SUBMIT HANDLER FOR FORM - FIRES AXIOS
   submitHandler = (e) => {
     e.preventDefault();
     const userQuery = this.state.artistQuery
@@ -135,6 +143,7 @@ class App extends Component {
     });
   };
 
+  // AXIOS CALL
   search = (query) => {
     axios({
       method: "GET",
@@ -149,7 +158,7 @@ class App extends Component {
     }).then((response) => {
 
       const userResponse = response.data.results.albummatches.album
-
+      // FILTERS SO THAT ALWAYS IMAGES ARE INCLUDED 
       const userResponseWithImage = userResponse.filter(withImages => {
         return withImages.image[0]["#text"].length > 0
       });
