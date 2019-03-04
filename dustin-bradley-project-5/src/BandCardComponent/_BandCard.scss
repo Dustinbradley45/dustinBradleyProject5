@@ -21,7 +21,9 @@ ul {
     padding: 15px;
     position:relative;
     // animation: scrollAlbumUp 20s linear infinite;
-    transition: .3s all linear;
+    transition: .15s all linear;
+
+    
  
     img{
         width: 100%;
@@ -48,10 +50,13 @@ ul {
        color: $secondaryColor;
        transition: .2s all linear;
 
-        &:hover {
-            // background-color: $secondaryColor;
+        &:hover,
+        &:focus {
+           
             color:$primaryColor;
         }
+
+        
     }
 
     &:hover,
@@ -70,17 +75,44 @@ ul {
     opacity:0;
     @include font($primaryFont, 1rem, 600);
     margin: 15px;
+    transition: .15s opacity linear;
+}
+
+.removeButton {
+    background:transparent;
+    border: none;
+
+  
 }
 
 i {
-    color: $primaryColor;
+    color: $secondaryColor;
    font-size: 1.5rem;
+   transition: .3s all linear;
 
     &:hover,
-    &:focus {
-        color:$secondaryColor;
+    &:focus-within {
+    
+              color: $primaryColor;
+          
+        
     }
     
+}
+
+.linkToPlay i{
+    color:$secondaryColor;
+    font-size: 1.5rem;
+    transition: .3s all linear;
+    
+    &:hover,
+    &:focus-within,
+    &:focus {
+        
+        color:$primaryColor;
+        transform: scale(1.12);
+        // font-size: 1.7rem;
+    }
 }
 
 .bandCardContainer:hover .overlay,
@@ -129,7 +161,7 @@ i {
      height: 3px;
      background-color:transparent;
      position: absolute;
-     left:0;
+     left:-3px;
      top: 7px;
      z-index: -1;
      transition:.3s all linear;
@@ -196,11 +228,11 @@ i {
     margin:20px;
 
     &:hover,
-    &:focus {
- 
-        color: $secondaryColor;
+    &:focus,
+    &:focus-within {
+        
+        color: $primaryColor;
         background-color:transparent;
-        border:none;
 
     }
 }

@@ -1,37 +1,41 @@
 header {
-   @include flex(column, center, flex-end);
    z-index: 100;
    background-color:$primaryColor;
    height: 15vh;
-   border-bottom: 2px solid $secondaryColor;
    transition: .3s height linear;
    overflow:hidden;
    position:fixed;
-   width:87%;
-    
+   width:100%;
+   border-bottom: 2px solid $secondaryColor;
    
-   h1 {
-       @include font($primaryFont,4rem, 300);
-       text-transform:lowercase;
-       width:100%;
-       padding:0;
-       margin-bottom:45px;
+
+
+       h1 {
+           @include font($primaryFont,4rem, 300);
+           text-transform:lowercase;
+           width:100%;
+           padding:0;
+           margin:0;
+           text-align:right;
+        
+       }
+    
+       &:hover,
+       &:focus {
+           height: 27vh;
+           
+       }
+
    }
+   .headerContainer {
+       width: 90.25%;
+   @include flex(column, center, space-between);
 
-   &:hover,
-   &:focus {
-       height: 27vh;
-        //  -webkit-box-shadow: 0px 0px 5px 5px rgba($secondaryColor, 0.75);
-        //  -moz-box-shadow: 0px 0px 5px 5px rgba($secondaryColor, .75);
-        //  box-shadow: 0px 0px 5px 5px rgba($secondaryColor, 0.75);
-       
+   
    }
+.headerIcon {
+    font-size: 1rem;
 }
-
-header:hover+footer {
-    height: 0;
-}
-
 
 nav input {
      background-color: $primaryColor;
@@ -39,25 +43,32 @@ nav input {
      color: $secondaryColor;
      text-align:center;
      @include font($primaryFont, 1.5rem, 300);
-
+    
+     line-height: 1;
+     padding: 7px;
 
      &:focus-within {
          border-bottom: 1px solid $secondaryColor;
-         -webkit-box-shadow: -1px 0px 22px 5px rgba($secondaryColor, 0.75);
-         -moz-box-shadow: -1px 0px 22px 5px rgba( $secondaryColor,.75);
-         box-shadow: -1px 0px 22px 5px rgba($secondaryColor, 0.75);
+         -webkit-box-shadow: 0px 0px 10px 1px rgba($secondaryColor, 0.75);
+         -moz-box-shadow: 0px 0px 10px 1px rgba( $secondaryColor,.75);
+         box-shadow: 0px 0px 10px 1px rgba($secondaryColor, 0.75);
      }
 
 }
 
-.lowerCase {
+.headerLeft {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
 
-    padding-left: 10px;
 }
 
+
+
+
 nav {
-      align-self: center;
-      
+    align-self: center;
+    transform: translateY(2.5rem);
 
     ul {
        @include flex (row, space-between, center);
@@ -77,23 +88,30 @@ nav {
     }
 }
 
-button {
-    background: transparent;
-    color:$secondaryColor;
+form {
+    @include flex(column, flex-start, flex-start);
 
-    border: 1px solid $secondaryColor;
-    transition: .1s all linear;
-    padding: 5px 10px;
-    @include font($primaryFont, 1rem, 300);
-    
- 
-    &:hover,
-    &:focus-within, {
+    button {
+        background: transparent;
+        color: $secondaryColor;
+        width:100%;
         border: 1px solid $secondaryColor;
-        color: darken($primaryColor, 5%);
-        background-color: darken($secondaryColor,5%);
+        transition: .1s all linear;
+        padding: 5px 10px;
+        margin-top:1rem;
+        @include font($primaryFont, 1rem, 300);
+
+
+        &:hover,
+        &:focus-within,
+            {
+            border: 1px solid $secondaryColor;
+            color: darken($primaryColor, 5%);
+            background-color: darken($secondaryColor, 5%);
+        }
     }
 }
+
 
 select {
     background-color: $primaryColor;
@@ -120,3 +138,20 @@ select {
 
    
 }
+
+.fa-compact-disc {
+    animation: 1s rotation linear infinite;
+}
+
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+

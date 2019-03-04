@@ -73,8 +73,6 @@ class App extends Component {
     }) 
   }
         
-      
-   
     
   removeAlbum = (key) => {
     const dbRef = firebase.database().ref(`${key}`);

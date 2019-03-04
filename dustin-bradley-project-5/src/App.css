@@ -198,10 +198,27 @@ input::-moz-focus-inner {
 
 body {
   font-size: 62.5%;
-  max-width: 1300px;
-  margin: 0 auto;
   background-color: #002a45;
   color: #ff7367;
+}
+
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.visuallyhidden:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  -webkit-clip-path: inset(100%);
+          clip-path: inset(100%);
+  clip: rect(0 0 0);
+  overflow: hidden;
 }
 
 img {
@@ -228,6 +245,34 @@ a {
 }
 
 header {
+  z-index: 100;
+  background-color: #002a45;
+  height: 15vh;
+  -webkit-transition: .3s height linear;
+  transition: .3s height linear;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  border-bottom: 2px solid #ff7367;
+}
+
+header h1 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 4rem;
+  font-weight: 300;
+  text-transform: lowercase;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  text-align: right;
+}
+
+header:hover, header:focus {
+  height: 27vh;
+}
+
+.headerContainer {
+  width: 90.25%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -238,36 +283,13 @@ header {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-  z-index: 100;
-  background-color: #002a45;
-  height: 15vh;
-  border-bottom: 2px solid #ff7367;
-  -webkit-transition: .3s height linear;
-  transition: .3s height linear;
-  overflow: hidden;
-  position: fixed;
-  width: 87%;
+  -webkit-box-align: space-between;
+      -ms-flex-align: space-between;
+          align-items: space-between;
 }
 
-header h1 {
-  font-family: "Open Sans", sans-serif;
-  font-size: 4rem;
-  font-weight: 300;
-  text-transform: lowercase;
-  width: 100%;
-  padding: 0;
-  margin-bottom: 45px;
-}
-
-header:hover, header:focus {
-  height: 27vh;
-}
-
-header:hover + footer {
-  height: 0;
+.headerIcon {
+  font-size: 1rem;
 }
 
 nav input {
@@ -278,22 +300,35 @@ nav input {
   font-family: "Open Sans", sans-serif;
   font-size: 1.5rem;
   font-weight: 300;
+  line-height: 1;
+  padding: 7px;
 }
 
 nav input:focus-within {
   border-bottom: 1px solid #ff7367;
-  -webkit-box-shadow: -1px 0px 22px 5px rgba(255, 115, 103, 0.75);
-  box-shadow: -1px 0px 22px 5px rgba(255, 115, 103, 0.75);
+  -webkit-box-shadow: 0px 0px 10px 1px rgba(255, 115, 103, 0.75);
+  box-shadow: 0px 0px 10px 1px rgba(255, 115, 103, 0.75);
 }
 
-.lowerCase {
-  padding-left: 10px;
+.headerLeft {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 nav {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+  -webkit-transform: translateY(2.5rem);
+          transform: translateY(2.5rem);
 }
 
 nav ul {
@@ -325,19 +360,37 @@ nav ul li:hover {
   border-bottom: 1px solid #ff7367;
 }
 
-button {
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+form button {
   background: transparent;
   color: #ff7367;
+  width: 100%;
   border: 1px solid #ff7367;
   -webkit-transition: .1s all linear;
   transition: .1s all linear;
   padding: 5px 10px;
+  margin-top: 1rem;
   font-family: "Open Sans", sans-serif;
   font-size: 1rem;
   font-weight: 300;
 }
 
-button:hover, button:focus-within {
+form button:hover, form button:focus-within {
   border: 1px solid #ff7367;
   color: #001a2c;
   background-color: #ff5c4e;
@@ -365,6 +418,33 @@ select .caretDown {
   height: 10px;
   width: 10px;
   background-color: #ff7367;
+}
+
+.fa-compact-disc {
+  -webkit-animation: 1s rotation linear infinite;
+          animation: 1s rotation linear infinite;
+}
+
+@-webkit-keyframes rotation {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes rotation {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
 }
 
 main {
@@ -399,8 +479,8 @@ ul {
   text-align: center;
   padding: 15px;
   position: relative;
-  -webkit-transition: .3s all linear;
-  transition: .3s all linear;
+  -webkit-transition: .15s all linear;
+  transition: .15s all linear;
 }
 
 .bandCardContainer img {
@@ -433,7 +513,7 @@ ul {
   transition: .2s all linear;
 }
 
-.bandCardContainer a:hover {
+.bandCardContainer a:hover, .bandCardContainer a:focus {
   color: #002a45;
 }
 
@@ -454,15 +534,37 @@ ul {
   font-size: 1rem;
   font-weight: 600;
   margin: 15px;
+  -webkit-transition: .15s opacity linear;
+  transition: .15s opacity linear;
+}
+
+.removeButton {
+  background: transparent;
+  border: none;
 }
 
 i {
-  color: #002a45;
+  color: #ff7367;
   font-size: 1.5rem;
+  -webkit-transition: .3s all linear;
+  transition: .3s all linear;
 }
 
-i:hover, i:focus {
+i:hover, i:focus-within {
+  color: #002a45;
+}
+
+.linkToPlay i {
   color: #ff7367;
+  font-size: 1.5rem;
+  -webkit-transition: .3s all linear;
+  transition: .3s all linear;
+}
+
+.linkToPlay i:hover, .linkToPlay i:focus-within, .linkToPlay i:focus {
+  color: #002a45;
+  -webkit-transform: scale(1.12);
+          transform: scale(1.12);
 }
 
 .bandCardContainer:hover .overlay,
@@ -514,7 +616,7 @@ ul:hover .bandCardContainer {
   height: 3px;
   background-color: transparent;
   position: absolute;
-  left: 0;
+  left: -3px;
   top: 7px;
   z-index: -1;
   -webkit-transition: .3s all linear;
@@ -584,12 +686,12 @@ ul:hover .bandCardContainer {
   margin: 20px;
 }
 
-.likeTheAlbum:hover, .likeTheAlbum:focus,
+.likeTheAlbum:hover, .likeTheAlbum:focus, .likeTheAlbum:focus-within,
 .dislikeTheAlbum:hover,
-.dislikeTheAlbum:focus {
-  color: #ff7367;
+.dislikeTheAlbum:focus,
+.dislikeTheAlbum:focus-within {
+  color: #002a45;
   background-color: transparent;
-  border: none;
 }
 
 @-webkit-keyframes scrollAlbumUp {
@@ -673,27 +775,72 @@ footer p {
 }
 
 @media only screen and (max-width: 520px) {
+  header {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    height: 11vh;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 5rem;
+  }
   header h1 {
     font-size: 3rem;
-    margin-bottom: 4rem;
+    text-align: center;
+    padding-top: 1rem;
+  }
+  header:hover, header:focus-within {
+    height: 25vh;
+  }
+  .headerLeft {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .headerContainer {
+    width: 100%;
+  }
+  nav input {
+    width: 100%;
+  }
+  button[type='submit'] {
+    margin-top: 5px;
+    width: 100%;
   }
 }
 
 @media only screen and (max-width: 450px) {
+  header {
+    padding-top: 1rem;
+  }
   main {
     margin: 0 2rem;
   }
 }
 
 @media only screen and (max-width: 400px) {
-  header header {
+  header {
     height: 13vh;
+    padding: 0;
   }
   header h1 {
     font-size: 2.5rem;
+    text-align: center;
   }
   main {
     margin: 0 1rem;
+  }
+  h4,
+  h5 {
+    padding: 0;
+    margin: 0;
+  }
+  .headerContainer {
+    width: 100%;
   }
 }
 /*# sourceMappingURL=App.css.map */

@@ -2,15 +2,48 @@
 
 @media #{$lgPhone} {
    header {
+
+    align-items: center;
+    height: 11vh;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 5rem;
        h1 {
            font-size: 3rem;
-           margin-bottom:4rem;
+           text-align:center;
+           padding-top:1rem;
+       }
+
+       &:hover,
+       &:focus-within {
+           height: 25vh;
        }
 
    } 
+
+   .headerLeft{
+       flex-direction: column;
+       justify-content: center;
+   }
+
+   .headerContainer {
+       width:100%;
+   }
+
+   nav input {
+      width:100%;
+   }
+
+   button[type='submit'] {
+       margin-top: 5px;
+       width:100%;
+   }
 }
 
 @media #{$medPhone} {
+    header {
+        padding-top:1rem;
+    }
     main {
         margin: 0 2rem;
     }
@@ -18,15 +51,27 @@
 
 @media #{$smPhone} {
     header {
-        header {
+   
             height: 13vh;
-        }
+            padding:0;
+        
 
         h1 {
             font-size: 2.5rem;
+            text-align:center;
         }
     }
     main {
         margin: 0 1rem;
+    }
+
+     h4,
+    h5 {
+        padding:0;
+        margin:0;
+    }
+
+    .headerContainer {
+        width:100%;
     }
 }
